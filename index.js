@@ -381,8 +381,20 @@ Gifted.ev.on("messages.upsert", async ({ messages }) => {
                 }
             }
 
-            const from = standardizeJid(ms.key.remoteJid);
             const botId = standardizeJid(Gifted.user?.id);
+
+const hasEntryPointContext = 
+  ms.message?.extendedTextMessage?.contextInfo?.entryPointConversionApp === "whatsapp" ||
+  ms.message?.imageMessage?.contextInfo?.entryPointConversionApp === "whatsapp" ||
+  ms.message?.videoMessage?.contextInfo?.entryPointConversionApp === "whatsapp" ||
+  ms.message?.documentMessage?.contextInfo?.entryPointConversionApp === "whatsapp" ||
+  ms.message?.audioMessage?.contextInfo?.entryPointConversionApp === "whatsapp";
+
+const isMessageYourself = hasEntryPointContext && ms.key.remoteJid.endsWith('@lid') && ms.key.fromMe;
+
+const from = isMessageYourself ? botId : standardizeJid(ms.key.remoteJid);
+
+            // const botId = standardizeJid(Gifted.user?.id);
             const isGroup = from.endsWith("@g.us");
             let groupInfo = null;
             let groupName = '';
