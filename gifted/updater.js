@@ -68,7 +68,7 @@ gmd({
         
     } catch (error) {
         console.error("Update error:", error);
-        return reply("❌ Update Failed. Please try Manually by Redeploying.");
+        return reply("❌ Update Failed. Please try by Redeploying Manually.");
     }
 });
 
