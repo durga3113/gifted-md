@@ -9,6 +9,40 @@ const moment = require('moment-timezone');
 
 
 gmd({
+  pattern: "owner",
+  description: "Shows Owner the Bot",
+  category: "owner",
+  react: "👑",
+},
+async (from, Gifted, conText) => {
+  const { q, mek, config, react, reply, isSuperUser } = conText;
+  
+try{
+if (!isSuperUser) return reply("*Owner Only Command*");
+const vcard = 'BEGIN:VCARD\n'
+          + 'VERSION:3.0\n' 
+          + `FN:${config.OWNER_NAME}\n` 
+          + 'ORG:GIFTED-TECH;\n' 
+          + `TEL;type=CELL;type=VOICE;waid=${config.OWNER_NUMBER}:${config.OWNER_NUMBER}\n`
+          + 'END:VCARD';
+  await Gifted.sendMessage(
+  from,
+  { 
+      contacts: { 
+          displayName, 
+          contacts: [{ vcard }] 
+      }
+  }, { quoted: mek }
+);
+await react("✅");
+}catch(e){
+console.log(e)
+reply(`${e}`)
+}
+})
+
+
+gmd({
   pattern: "shell",
   react: "👑",
   aliases: ['exec', 'terminal', 'sh', 'ex'],
