@@ -1,4 +1,4 @@
-const { gmd } = require("../gift");
+const { gmd, toPtt } = require("../gift");
 const { downloadContentFromMessage, generateWAMessageFromContent, normalizeMessageContent } = require('gifted-baileys');
 const { sendButtons } = require('gifted-btns');
 
@@ -146,14 +146,14 @@ gmd({
 
       const audioApi = `${GiftedTechApi}/api/download/ytmp3?stream=true&apikey=${GiftedApiKey}&url=${encodeURIComponent(videoUrl)}`;
 
-      const response = await gmdBuffer(audioApi);
+      const bufferRes = await gmdBuffer(audioApi);
       
       const sizeMB = response.length / (1024 * 1024);
       if (sizeMB > 16) {
         await reply("File is large, processing might take a while...");
       }
 
-      const convertedBuffer = await formatAudio(response);
+      const convertedBuffer = await formatAudio(bufferRes);
 
       const dateNow = Date.now();
       
@@ -165,6 +165,7 @@ gmd({
         image: firstVideo.thumbnail || botPic,
         buttons: [
           { id: `id1_${firstVideo.id}_${dateNow}`, text: 'Audio 🎶' },
+          { id: `id2_${firstVideo.id}_${dateNow}`, text: 'Voice Message 🔉' },
           { id: `id2_${firstVideo.id}_${dateNow}`, text: 'Audio Document 📄' },
           {
             name: 'cta_url',
@@ -206,6 +207,16 @@ gmd({
               break;
 
             case `id2_${firstVideo.id}_${dateNow}`:
+              const pttBuffer = await toPtt(bufferRes);
+              await Gifted.sendMessage(from, {
+                audio: pttBuffer,
+                mimetype: "audio/ogg; codecs=opus",
+                ptt: true,
+                waveform: [1000, 0, 1000, 0, 1000, 0, 1000],
+              }, { quoted: messageData });
+              break;
+
+            case `id3_${firstVideo.id}_${dateNow}`:
               await Gifted.sendMessage(from, {
                 document: convertedBuffer,
                 mimetype: "audio/mpeg",
