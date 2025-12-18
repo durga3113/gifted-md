@@ -65,9 +65,8 @@ gmd({
     react: '💫',
     description: "Request New Features.",
     category: "owner",
-},
 }, async (from, Gifted, conText) => {
-const { mek, q, sender, react, pushName, botPrefix } = conText;
+const { mek, q, sender, react, pushName, botPrefix, isSuperUser, reply } = conText;
 const reportedMessages = {};
 const devlopernumber = '254799916673';
 try{
@@ -80,10 +79,9 @@ try{
     reportedMessages[messageId] = true;
     const textt = `*| REQUEST/REPORT |*`;
     const teks1 = `\n\n*User*: @${sender.split("@")[0]}\n*Request:* ${q}`;
-    const teks2 = `\n\n*Hi ${pushname}, your request has been forwarded to my Owners.*\n*Please wait...*`;
     Gifted.sendMessage(devlopernumber + "@s.whatsapp.net", {
         text: textt + teks1,
-        mentions: [m.sender],
+        mentions: [sender],
     }, {
         quoted: mek,
     });
@@ -102,9 +100,9 @@ gmd({
     description: "Display Bot's Uptime, Date, Time, and Other Stats",
     react: "📜",
     category: "general",
-}, 
 }, async (from, Gifted, conText) => {
-const { mek, sender, react, config, pushName, botPic, botMode, botVersion, botName, botFooter, timeZone, botPrefix, newsletterJid } = conText;
+const { mek, sender, react, config, pushName, botPic, botMode, botVersion, botName, botFooter, timeZone, botPrefix, newsletterJid, reply } = conText;
+try {
       function formatUptime(seconds) {
             const days = Math.floor(seconds / (24 * 60 * 60));
             seconds %= 24 * 60 * 60;
@@ -183,12 +181,13 @@ const { mek, sender, react, config, pushName, botPic, botMode, botVersion, botNa
 
 gmd({
     pattern: "list",
-    alias: ["listmenu"],
+    aliases: ["listmenu"],
     description: "Show All Commands and their Usage",
     react: "📜",
     category: "general",
-},
-const { mek, sender, react, pushName, botPic, botMode, botVersion, botName, botFooter, timeZone, botPrefix, newsletterJid } = conText;
+}, async (from, Gifted, conText) => {
+const { mek, sender, react, pushName, botPic, botMode, botVersion, botName, botFooter, timeZone, botPrefix, newsletterJid, reply } = conText;
+try {
     function formatUptime(seconds) {
             const days = Math.floor(seconds / (24 * 60 * 60));
             seconds %= 24 * 60 * 60;
@@ -268,7 +267,8 @@ gmd({
   category: "general",
   description: "Fetch bot main menu",
 }, async (from, Gifted, conText) => {
-const { mek, sender, react, pushName, botPic, botMode, botVersion, botName, botFooter, timeZone, botPrefix, newsletterJid } = conText;
+const { mek, sender, react, pushName, botPic, botMode, botVersion, botName, botFooter, timeZone, botPrefix, newsletterJid, reply } = conText;
+try {
     function formatUptime(seconds) {
             const days = Math.floor(seconds / (24 * 60 * 60));
             seconds %= 24 * 60 * 60;
@@ -346,8 +346,11 @@ const { mek, sender, react, pushName, botPic, botMode, botVersion, botName, botF
       };
       await Gifted.sendMessage(from, giftedMess, { quoted: mek });
       await react("✅");
-  }
-);
+    } catch (e) {
+        console.error(e);
+        reply(`${e}`);
+    }
+});
 
 
 gmd({
@@ -417,43 +420,6 @@ gmd({
   }
 });
 
-/*
-gmd({ 
-  pattern: "ping",
-  react: "⚡",
-  category: "general",
-  description: "Check bot response speed",
-}, async (from, Gifted, conText) => {
-      const { mek, react, newsletterJid, botName } = conText;
-    const startTime = process.hrtime();
-
-    await new Promise(resolve => setTimeout(resolve, Math.floor(80 + Math.random() * 420)));
-    
-    const elapsed = process.hrtime(startTime);
-    const responseTime = Math.floor((elapsed[0] * 1000) + (elapsed[1] / 1000000));
-
-    await Gifted.sendMessage(from, {
-      text: `⚡ Pong: ${responseTime}ms`,
-      contextInfo: {
-        forwardingScore: 5,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: newsletterJid,
-          newsletterName: botName,
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });
-      await react("✅");
-  }
-);
-
-*/
-
-
-
-
-
 gmd({ 
   pattern: "uptime", 
   aliases: ['up'],
@@ -484,18 +450,6 @@ gmd({
     }
   ]
 });
-  /*  await Gifted.sendMessage(from, {
-      text: `⏱️ Uptime: ${days}d ${hours}h ${minutes}m ${seconds}s`,
-      contextInfo: {
-        forwardingScore: 5,
-        isForwarded: true,
-        forwardedNewsletterMessageInfo: {
-          newsletterJid: newsletterJid,
-          newsletterName: botName,
-          serverMessageId: 143
-        }
-      }
-    }, { quoted: mek });*/
       await react("✅");
   }
 );
@@ -532,21 +486,6 @@ await sendButtons(Gifted, from, {
     }
   ]
 });
-   /* const giftedMess = {
-        image: { url: botPic },
-        caption: messageText,
-        contextInfo: {
-          mentionedJid: [sender],
-          forwardingScore: 5,
-          isForwarded: true,
-          forwardedNewsletterMessageInfo: {
-            newsletterJid: newsletterJid,
-            newsletterName: botName,
-            serverMessageId: 143
-          }
-        }
-      };
-      await Gifted.sendMessage(from, giftedMess, { quoted: mek });*/
       await react("✅");
   }
 );
@@ -612,7 +551,6 @@ gmd({
     }
 
     await Gifted.sendMessage(sender, mediaData, { quoted: mek });
-    // await reply(`✅ Saved Successfully!`);
     await react("✅");
 
   } catch (error) {
@@ -620,5 +558,3 @@ gmd({
     await reply(`❌ Failed to save the message. Error: ${error.message}`);
   }
 });
-
-
