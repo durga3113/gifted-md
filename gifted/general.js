@@ -229,7 +229,7 @@ try {
 │ ✦ *Dᴀᴛᴇ Tᴏᴅᴀʏ* : ${monospace(date)}
 │ ✦ *Tɪᴍᴇ Zᴏɴᴇ* : ${monospace(timeZone)}
 │ ✦ *Sᴇʀᴠᴇʀ Rᴀᴍ* : ${monospace(ram)}
-╰─────────────────╯${readmore}\n`;
+╰─────────────╯${readmore}\n`;
 
         commands.forEach((gmd, index) => {
             if (gmd.pattern && gmd.description) {
