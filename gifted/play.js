@@ -207,7 +207,7 @@ gmd({
               break;
 
             case `id2_${firstVideo.id}_${dateNow}`:
-              const pttBuffer = await toPtt(bufferRes);
+              const pttBuffer = await toPtt(convertedBuffer);
               await Gifted.sendMessage(from, {
                 audio: pttBuffer,
                 mimetype: "audio/ogg; codecs=opus",
