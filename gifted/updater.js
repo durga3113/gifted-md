@@ -1,3 +1,9 @@
+const { gmd } = require("../gift");
+const axios = require('axios');
+const fs = require('fs');
+const path = require("path");
+const AdmZip = require("adm-zip");
+
 gmd({
     pattern: "update",
     alias: ["updatenow", "updt", "sync", "update now"],
