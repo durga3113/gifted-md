@@ -29,7 +29,7 @@ const vcard = 'BEGIN:VCARD\n'
   from,
   { 
       contacts: { 
-          displayName, 
+          `${config.OWNER_NAME}`, 
           contacts: [{ vcard }] 
       }
   }, { quoted: mek }
