@@ -9,7 +9,7 @@ gmd({
   pattern: "surebet",
   aliases: ["bettips", "odds", "predict", "bet", "sureodds"],
   description: "Get betting tips and odds",
-  category: "Sports",
+  category: "sports",
   filename: __filename
 }, async (from, Gifted, conText) => {
   const { mek, reply, botName } = conText;
