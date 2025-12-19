@@ -1,7 +1,7 @@
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
 <h1 align="center"> 𝐆𝐈𝐅𝐓𝐄𝐃-𝐌𝐃 𝐕𝐄𝐑𝐒𝐈𝐎𝐍 𝟓.𝟎.𝟎 </h1>
 
-- Bot is Safe for Heroku so don't ask more questions
+- Bot is Safe for Heroku(only if you fork and deploy your own fork) so don't ask more questions
 
 
 <details>
@@ -11,7 +11,6 @@
 
 <a href="https://github.com/mauricegift/gifted-md/archive/refs/heads/main.zip"><img src="https://img.shields.io/badge/DOWNLOAD%20ZIP-yellow" alt="Panel Zip File" width="150"></a>
 
-- You can add your custom premium/unlimited api key on config.js/.env on app.json(heroku) when deploying to avoid any inconveniences caused by free api key limit.
   
 </details>
 
@@ -47,7 +46,7 @@
 <summary>GET YOUR SESSION_ID</summary>
 <a href="https://session.giftedtech.co.ke"><img src="https://img.shields.io/badge/CLICK%20HERE-green" alt="Pairing Code" width="150"></a>
 
-- Session ID must start with **Gifted~** and is 15 characters in length.
+- Session ID must start with **Gifted~**
 </details>
 
 ### 𝟑. 𝐃𝐄𝐏𝐋𝐎𝐘𝐌𝐄𝐍𝐓 𝐒𝐄𝐂𝐓𝐈𝐎𝐍:
@@ -57,7 +56,7 @@
 <summary>TAP TO OPEN</summary>
 <a href="https://signup.heroku.com/login"><img src="https://img.shields.io/badge/HEROKU%20SIGNUP-white" alt="Pairing Code" width="150"></a>
   
-<a href="https://session.giftedtech.my.id/auth"><img src="https://img.shields.io/badge/DEPLOY%20NOW-red" alt="Deploy Gifted" width="150"></a>
+<a href="https://session.giftedtech.co.ke/auth"><img src="https://img.shields.io/badge/DEPLOY%20NOW-red" alt="Deploy Gifted" width="150"></a>
 </details>
 
 <a><img src='https://i.imgur.com/LyHic3i.gif'/></a>
@@ -111,7 +110,7 @@
 <summary>𝗖𝗟𝗜𝗖𝗞 𝗛𝗘𝗥𝗘</summary>
   
 - **[CONTACT SUPPORT](https://api.giftedtech.co.ke/contact) For More Info**
-- **Join [WHATSAPP CHANNEL](https://whatsapp.com/channel/0029VaYauR9ISTkHTj4xvi1l) for Daily Updates.**
+- **Join [WHATSAPP CHANNEL](https://whatsapp.com/channel/0029VbC5WlPL7UVQ6AbK7x2n) for Daily Updates.**
 - **Check out my [Website Profile](https://portfolio.giftedtech.co.ke) for More Projects.**
 </details>
 
