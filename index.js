@@ -220,7 +220,7 @@ Gifted.ev.on("messages.upsert", async ({ messages }) => {
         if (key.fromMe) return;
         if (key.remoteJid === 'status@broadcast') return;
 
-        const sender = key.remoteJid || key.senderPn || key.participantPn || key.participant;
+        const sender = key.senderPn || key.participantPn || key.participant || key.remoteJid;
         const senderPushName = key.pushName || ms.pushName;
 
         if (sender === botJid || sender === botOwnerJid || key.fromMe) return;
@@ -242,7 +242,7 @@ Gifted.ev.on("messages.upsert", async ({ messages }) => {
             const deletedMsg = giftech.chats[key.remoteJid].find(m => m.key.id === deletedId);
             if (!deletedMsg?.message) return;
 
-            const deleter = key.participantPn || key.participant || key.participantAlt || key.remoteJidAlt || key.remoteJid;
+            const deleter = key.participantPn || || key.senderPn || key.participantAlt || key.remoteJidAlt || key.participant || key.remoteJid;
             const deleterPushName = key.pushName || ms.pushName;
             
             if (deleter === botJid || deleter === botOwnerJid) return;
@@ -304,7 +304,7 @@ Gifted.ev.on("messages.upsert", async ({ messages }) => {
         mek = mek.messages[0];
         if (!mek || !mek.message) return;
 
-        const fromJid = mek.key.participant || mek.key.remoteJid;
+        const fromJid = mek.key.participantPn || mek.key.participant || mek.key.remoteJidAlt || mek.key.remoteJid;
         mek.message = (getContentType(mek.message) === 'ephemeralMessage') 
             ? mek.message.ephemeralMessage.message 
             : mek.message;
@@ -809,7 +809,7 @@ Gifted.getLidFromJid = async (jid) => {
                 console.log(`Connection closed due to: ${reason}`);
                 
                 if (reason === DisconnectReason.badSession) {
-                    console.log("Bad session file, delete it and scan again");
+                    console.log("Bad session file, automatically deleted...please scan again");
                     try {
                         await fs.remove(__dirname + "/gift/session");
                     } catch (e) {
@@ -826,7 +826,7 @@ Gifted.getLidFromJid = async (jid) => {
                     console.log("Connection replaced, another new session opened");
                     process.exit(1);
                 } else if (reason === DisconnectReason.loggedOut) {
-                    console.log("Device logged out, delete session and scan again");
+                    console.log("Device logged out, session file automatically deleted...please scan again");
                     try {
                         await fs.remove(__dirname + "/gift/session");
                     } catch (e) {
