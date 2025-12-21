@@ -278,7 +278,7 @@ Gifted.ev.on("messages.upsert", async ({ messages }) => {
     Gifted.ev.on('messages.upsert', async (mek) => {
         try {
        const msg = mek.messages[0];
-       console.log(msg) //////////////////////////
+      // console.log(msg) //////////////////////////
        if (!msg || !msg?.message) return;
        if (msg?.key?.remoteJid === newsletterJid && msg?.key?.server_id) {
            try {
