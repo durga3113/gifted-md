@@ -251,23 +251,36 @@ gmd({
     return reply(`@${userNumber} you are not an admin`, { mentions: [`${userNumber}@s.whatsapp.net`] });
   }
 
-  let result;
-  if (quotedUser) {
-    if (quotedUser.includes('@lid')) {
-      result = quotedUser.replace('@', '') + '@lid';
-    } else {
-      result = quotedUser;
-    }
+  let result = quotedUser;
+  
+  if (result && result.includes('@lid')) {
+    result = result.replace('@', '') + '@lid';
   }
 
   let finalResult = result;
+
   if (result && result.includes('@lid')) {
-    finalResult = await Gifted.getJidFromLid(result);
+    try {
+      finalResult = await Gifted.getJidFromLid(result);
+      if (!finalResult) {
+        await react("❌");
+        return reply("Could not resolve user from the quoted message.");
+      }
+    } catch (error) {
+      console.error("Error resolving lid:", error);
+      await react("❌");
+      return reply("Error resolving user from the quoted message.");
+    }
+  }
+
+  if (!finalResult) {
+    await react("❌");
+    return reply("Could not identify the user to promote.");
   }
 
   const standardizedFinalResult = finalResult.toLowerCase();
-  const standardizedGroupAdmins = groupAdmins.map(admin => admin.toLowerCase());
-  const standardizedGroupSuperAdmins = groupSuperAdmins.map(admin => admin.toLowerCase());
+  const standardizedGroupAdmins = groupAdmins ? groupAdmins.map(admin => admin.toLowerCase()) : [];
+  const standardizedGroupSuperAdmins = groupSuperAdmins ? groupSuperAdmins.map(admin => admin.toLowerCase()) : [];
   const allAdmins = [...standardizedGroupAdmins, ...standardizedGroupSuperAdmins];
 
   if (allAdmins.includes(standardizedFinalResult)) {
