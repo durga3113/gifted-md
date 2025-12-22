@@ -253,7 +253,7 @@ gmd({
 
   let result;
   if (quotedUser) {
-    if (quotedUser.startsWith('@') && quotedUser.includes('@lid')) {
+    if (quotedUser.includes('@lid')) {
       result = quotedUser.replace('@', '') + '@lid';
     } else {
       result = quotedUser;
